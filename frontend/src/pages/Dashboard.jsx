@@ -150,7 +150,7 @@ export default function Dashboard() {
     heroInner: { maxWidth: 1400, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 10 },
     heroTitle: {
       fontFamily: "'Oxanium', sans-serif",
-      fontSize: 32, fontWeight: 800, color: '#f1f5f9',
+      fontSize: 32, fontWeight: 800, color: '#800000',
       marginBottom: 6, letterSpacing: '-0.5px',
     },
     heroSub: { fontSize: 15, color: '#444', fontWeight: 500 },
