@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+const API_BASE = process.env.REACT_APP_API_URL || '';
 import Navbar from '../components/Navbar';
 import MediaSection from '../components/MediaSection';
 
@@ -28,8 +29,8 @@ export default function Dashboard() {
   const fetchAnime = useCallback(async () => {
     // Fetch top and seasonal independently so one failure doesn't block the other
     const [topRes, seasonalRes] = await Promise.allSettled([
-      axios.get('/api/media/anime/top'),
-      axios.get('/api/media/anime/season'),
+      axios.get(`${API_BASE}/api/media/anime/top`),
+      axios.get(`${API_BASE}/api/media/anime/season`),
     ]);
 
     if (topRes.status === 'fulfilled') {
@@ -47,7 +48,7 @@ export default function Dashboard() {
 
   const fetchMovies = useCallback(async () => {
     try {
-      const res = await axios.get('/api/media/movies/popular?page=1');
+      const res = await axios.get(`${API_BASE}/api/media/movies/popular?page=1`);
       const movieData = res.data.data || [];
       setData(d => ({ ...d, movies: movieData }));
       setOffsets(o => ({ ...o, movies: 2 }));
@@ -61,7 +62,7 @@ export default function Dashboard() {
 
   const fetchTV = useCallback(async () => {
     try {
-      const res = await axios.get('/api/media/tv/popular?offset=0&limit=60');
+      const res = await axios.get(`${API_BASE}/api/media/tv/popular?offset=0&limit=60`);
       setData(d => ({ ...d, tv: res.data.data || [] }));
       setOffsets(o => ({ ...o, tv: res.data.nextOffset || 6 }));
     } catch {
@@ -111,7 +112,7 @@ export default function Dashboard() {
     const scopedFilter = tabFilterMap[activeTab] || 'all';
     setSearchFilter(scopedFilter);
     try {
-      const res = await axios.get(`/api/media/search/multi?q=${encodeURIComponent(q)}`);
+      const res = await axios.get(`${API_BASE}/api/media/search/multi?q=${encodeURIComponent(q)}`);
       setSearchResults(res.data.data);
     } catch {
       setSearchResults({ anime: [], tvmaze: [], movies: [] });
@@ -144,13 +145,12 @@ export default function Dashboard() {
     page: { minHeight: '100vh', background: '#0d0f1a' },
     hero: {
       background: 'linear-gradient(135deg, rgba(255,61,107,0.08) 0%, rgba(139,92,246,0.06) 50%, transparent 100%)',
-      borderBottom: '1px solid rgba(255,61,107,0.06)',
       padding: '32px 24px',
     },
     heroInner: { maxWidth: 1400, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 10 },
     heroTitle: {
       fontFamily: "'Oxanium', sans-serif",
-      fontSize: 32, fontWeight: 800, color: '#800000',
+      fontSize: 32, fontWeight: 800, color: '#7c0000',
       marginBottom: 6, letterSpacing: '-0.5px',
     },
     heroSub: { fontSize: 15, color: '#444', fontWeight: 500 },

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+const API_BASE = process.env.REACT_APP_API_URL || '';
 import toast from 'react-hot-toast';
 import Navbar from '../components/Navbar';
 
@@ -48,7 +49,7 @@ export default function WatchlistPage() {
   const fetchWatchlist = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await axios.get('/api/watchlist');
+      const res = await axios.get(`${API_BASE}/api/watchlist`);
       setItems(res.data.data || []);
     } catch {
       toast.error('Failed to load watchlist');
@@ -69,7 +70,7 @@ export default function WatchlistPage() {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.put(`/api/watchlist/${id}`, { status: newStatus });
+      await axios.put(`${API_BASE}/api/watchlist/${id}`, { status: newStatus });
       setItems(prev => prev.map(i => i._id === id ? { ...i, status: newStatus } : i));
       toast.success('Status updated');
     } catch {
@@ -79,7 +80,7 @@ export default function WatchlistPage() {
 
   const handleRemove = async (id, title) => {
     try {
-      await axios.delete(`/api/watchlist/${id}`);
+      await axios.delete(`${API_BASE}/api/watchlist/${id}`);
       setItems(prev => prev.filter(i => i._id !== id));
       toast.success(`Removed "${title}"`);
     } catch {
