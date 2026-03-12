@@ -73,3 +73,78 @@ input, textarea { font-family:inherit; }
   position: relative;
   z-index: 2;
 }
+
+/* ── Mobile Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Navbar */
+  .nav-tabs       { display: none !important; }
+  .nav-search     { max-width: 160px !important; }
+  .nav-watchlist  { display: none !important; }
+
+  /* Auth page — stack vertically */
+  .auth-left      { display: none !important; }
+  .auth-right     { padding: 32px 24px !important; }
+
+  /* Dashboard hero */
+  .hero-inner     { padding: 28px 16px !important; }
+
+  /* Grids — 2 columns on mobile */
+  .media-grid     { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+
+  /* Section padding */
+  .section-wrap   { padding: 20px 16px !important; }
+
+  /* Watchlist grid */
+  .watchlist-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+
+  /* Bottom mobile nav bar */
+  .mobile-nav     { display: flex !important; }
+}
+
+@media (max-width: 480px) {
+  .media-grid     { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+  .watchlist-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* Mobile bottom nav — hidden by default, shown on mobile */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(253,240,245,0.97);
+  backdropFilter: blur(20px);
+  border-top: 1px solid rgba(200,120,160,0.2);
+  padding: 8px 0 12px;
+  z-index: 200;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -4px 24px rgba(200,60,100,0.1);
+}
+.mobile-nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 12px;
+  transition: background 0.2s;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  color: #9080a0;
+  font-weight: 500;
+}
+.mobile-nav-btn.active {
+  color: #ff3d6b;
+}
+.mobile-nav-btn span.icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* Add padding at bottom on mobile so content isn't hidden behind nav */
+@media (max-width: 768px) {
+  .page-content { padding-bottom: 72px !important; }
+}

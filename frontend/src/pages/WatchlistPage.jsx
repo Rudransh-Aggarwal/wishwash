@@ -2,13 +2,12 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import Navbar from '../components/Navbar';
-import API_BASE from '../config';
 
 const STATUS_TABS = [
   { key: 'all', label: 'All' },
   { key: 'watching', label: 'Watching' },
   { key: 'on-hold', label: 'On Hold' },
-  { key: 'plan-to-watach', label: 'Plan to Watch' },
+  { key: 'plan-to-watch', label: 'Plan to Watch' },
   { key: 'dropped', label: 'Dropped' },
   { key: 'completed', label: 'Completed' },
 ];
@@ -49,7 +48,7 @@ export default function WatchlistPage() {
   const fetchWatchlist = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${API_BASE}/api/watchlist`);
+      const res = await axios.get('/api/watchlist');
       setItems(res.data.data || []);
     } catch {
       toast.error('Failed to load watchlist');
@@ -70,7 +69,7 @@ export default function WatchlistPage() {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.put(`${API_BASE}/api/watchlist/${id}`, { status: newStatus });
+      await axios.put(`/api/watchlist/${id}`, { status: newStatus });
       setItems(prev => prev.map(i => i._id === id ? { ...i, status: newStatus } : i));
       toast.success('Status updated');
     } catch {
@@ -80,7 +79,7 @@ export default function WatchlistPage() {
 
   const handleRemove = async (id, title) => {
     try {
-      await axios.delete(`${API_BASE}/api/watchlist/${id}`);
+      await axios.delete(`/api/watchlist/${id}`);
       setItems(prev => prev.filter(i => i._id !== id));
       toast.success(`Removed "${title}"`);
     } catch {
@@ -266,7 +265,7 @@ export default function WatchlistPage() {
             </div>
           </div>
         ) : (
-          <div style={s.grid}>
+          <div className="watchlist-grid" style={s.grid}>
             {filtered.map((item, i) => (
               <div key={item._id} className="fade-in" style={{ animationDelay: `${i * 0.03}s` }}>
                 <div

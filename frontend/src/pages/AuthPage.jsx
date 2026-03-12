@@ -69,7 +69,7 @@ export default function AuthPage() {
       `}</style>
 
       {/* ── LEFT PANEL — Illustration ── */}
-      <div style={{
+      <div className="auth-left" style={{
         flex: '0 0 48%', position: 'relative',
         background: 'linear-gradient(160deg, #ffd6e0 0%, #ffb3c6 40%, #ffc8dd 100%)',
         display: 'flex', flexDirection: 'column',
@@ -213,7 +213,7 @@ export default function AuthPage() {
       </div>
 
       {/* ── RIGHT PANEL — Form ── */}
-      <div style={{
+      <div className="auth-right" style={{
         flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
         padding: '40px 48px', background: '#fdf0f5',
       }}>

@@ -36,7 +36,7 @@ function GridView({ title, items, type, loading, error, onWatchlistChange, onLoa
   };
 
   return (
-    <div style={{ marginBottom: 52 }}>
+    <div className="section-wrap" style={{ marginBottom: 52 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 24 }}>
         <div style={{
           width: 4, height: 24, borderRadius: 2,
@@ -159,7 +159,7 @@ function RowView({ title, items, type, loading, error, onWatchlistChange }) {
   const displayItems = loading ? Array(12).fill(null) : (items || []);
 
   return (
-    <div style={{ marginBottom: 52 }}>
+    <div className="section-wrap" style={{ marginBottom: 52 }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
           <h2 style={{
