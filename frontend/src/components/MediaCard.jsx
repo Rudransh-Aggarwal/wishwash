@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+const API_BASE = process.env.REACT_APP_API_URL || '';
 
 export default function MediaCard({ item, type, onWatchlistChange }) {
   const [hovered, setHovered] = useState(false);
@@ -43,7 +44,7 @@ export default function MediaCard({ item, type, onWatchlistChange }) {
     e.stopPropagation();
     setAdding(true);
     try {
-      await axios.post('/api/watchlist', {
+      await axios.post(`${API_BASE}/api/watchlist`, {
         mediaId, mediaType, title, image, score, episodes,
         status: 'plan-to-watch'
       });
